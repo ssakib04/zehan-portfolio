@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+i<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -649,4 +649,198 @@
                     <div class="project-image">🚀</div>
                     <div class="project-info">
                         <h4>Digital Portfolio</h4>
-                        <p>A creative showcase platform for artists and designers featu
+                        <p>A creative showcase platform for artists and designers featuring dynamic galleries and interactive elements.</p>
+                        <a href="#" class="project-link">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">💎</div>
+                    <div class="project-info">
+                        <h4>Brand Identity</h4>
+                        <p>Complete brand identity design including logo, color palette, and digital presence for a tech startup.</p>
+                        <a href="#" class="project-link">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Let's Connect</h2>
+            <form class="contact-form fade-in">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#">📧</a>
+                <a href="#">💼</a>
+                <a href="#">🐱</a>
+                <a href="#">📷</a>
+            </div>
+            <p>&copy; 2025 Zehan Ahmed. Crafted with ❤️ and lots of ☕</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thanks for reaching out! I\'ll get back to you soon. 😊');
+            e.target.reset();
+        });
+
+        // Add some interactive cursor effects
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'cursor';
+                newCursor.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, rgba(255,107,107,0.8) 0%, rgba(78,205,196,0.8) 100%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    mix-blend-mode: difference;
+                    transition: transform 0.1s ease;
+                `;
+                document.body.appendChild(newCursor);
+            }
+            
+            const actualCursor = document.querySelector('.cursor');
+            actualCursor.style.left = e.clientX - 10 + 'px';
+            actualCursor.style.top = e.clientY - 10 + 'px';
+        });
+
+        // Rain Animation System
+        function createRaindrop() {
+            const raindrop = document.createElement('div');
+            raindrop.className = 'raindrop';
+            
+            // Random size and position
+            const size = Math.random() * 3 + 1; // 1-4px wide
+            const height = Math.random() * 10 + 10; // 10-20px tall
+            const left = Math.random() * window.innerWidth;
+            const animationDuration = Math.random() * 1 + 0.5; // 0.5-1.5s
+            const delay = Math.random() * 0.5; // 0-0.5s delay
+            
+            // Set raindrop properties
+            raindrop.style.width = size + 'px';
+            raindrop.style.height = height + 'px';
+            raindrop.style.left = left + 'px';
+            raindrop.style.animationDuration = animationDuration + 's';
+            raindrop.style.animationDelay = delay + 's';
+            
+            // Add to rain container
+            const rainContainer = document.getElementById('rainContainer');
+            rainContainer.appendChild(raindrop);
+            
+            // Create splash effect when raindrop hits bottom
+            setTimeout(() => {
+                createSplash(left);
+                raindrop.remove();
+            }, (animationDuration + delay) * 1000);
+        }
+
+        function createSplash(x) {
+            const splash = document.createElement('div');
+            splash.className = 'rain-splash';
+            splash.style.left = x + 'px';
+            splash.style.bottom = '0px';
+            
+            document.getElementById('rainContainer').appendChild(splash);
+            
+            setTimeout(() => {
+                splash.remove();
+            }, 500);
+        }
+
+        // Generate continuous rain
+        function startRain() {
+            setInterval(() => {
+                // Create multiple raindrops for heavier rain effect
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => createRaindrop(), i * 50);
+                }
+            }, 150); // New batch every 150ms
+        }
+
+        // Start rain animation when page loads
+        window.addEventListener('load', () => {
+            setTimeout(startRain, 1000); // Start after 1 second
+        });
+
+        // Cleanup raindrops periodically to prevent memory buildup
+        setInterval(() => {
+            const rainContainer = document.getElementById('rainContainer');
+            const raindrops = rainContainer.children;
+            
+            // Remove excess raindrops (keep only last 100)
+            while (raindrops.length > 100) {
+                raindrops[0].remove();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
