@@ -1,4 +1,4 @@
-i<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,11 +15,11 @@ i<!DOCTYPE html>
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #4a7c59 0%, #2d5016 50%, #1a3f0f 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%);
             position: relative;
         }
 
-        /* Mountain Background */
+        /* Winter Mountain Background */
         body::before {
             content: '';
             position: fixed;
@@ -28,21 +28,25 @@ i<!DOCTYPE html>
             width: 100%;
             height: 100%;
             background: 
-                /* Far mountains */
-                radial-gradient(ellipse 800px 200px at 20% 100%, rgba(45, 80, 22, 0.8) 0%, transparent 50%),
-                radial-gradient(ellipse 600px 180px at 60% 100%, rgba(74, 124, 89, 0.6) 0%, transparent 50%),
-                radial-gradient(ellipse 700px 220px at 90% 100%, rgba(26, 63, 15, 0.9) 0%, transparent 50%),
+                /* Far snowy mountains */
+                radial-gradient(ellipse 800px 200px at 20% 100%, rgba(30, 41, 59, 0.9) 0%, transparent 50%),
+                radial-gradient(ellipse 600px 180px at 60% 100%, rgba(51, 65, 85, 0.7) 0%, transparent 50%),
+                radial-gradient(ellipse 700px 220px at 90% 100%, rgba(15, 23, 42, 0.95) 0%, transparent 50%),
                 /* Mid mountains */
-                radial-gradient(ellipse 500px 150px at 35% 100%, rgba(34, 70, 18, 0.7) 0%, transparent 50%),
-                radial-gradient(ellipse 400px 130px at 80% 100%, rgba(60, 100, 45, 0.5) 0%, transparent 50%),
-                /* Near mountains */
-                radial-gradient(ellipse 300px 100px at 50% 100%, rgba(74, 124, 89, 0.8) 0%, transparent 50%);
+                radial-gradient(ellipse 500px 150px at 35% 100%, rgba(20, 30, 48, 0.8) 0%, transparent 50%),
+                radial-gradient(ellipse 400px 130px at 80% 100%, rgba(40, 50, 70, 0.6) 0%, transparent 50%),
+                /* Near mountains with snow caps */
+                radial-gradient(ellipse 300px 100px at 50% 100%, rgba(30, 41, 59, 0.9) 0%, transparent 50%),
+                /* Snow caps */
+                radial-gradient(ellipse 200px 30px at 20% 85%, rgba(240, 248, 255, 0.3) 0%, transparent 70%),
+                radial-gradient(ellipse 150px 25px at 60% 82%, rgba(240, 248, 255, 0.25) 0%, transparent 70%),
+                radial-gradient(ellipse 180px 28px at 90% 78%, rgba(240, 248, 255, 0.35) 0%, transparent 70%);
             pointer-events: none;
             z-index: -2;
         }
 
-        /* Rain Container */
-        .rain-container {
+        /* Snow Container */
+        .snow-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -53,49 +57,53 @@ i<!DOCTYPE html>
             overflow: hidden;
         }
 
-        /* Individual Raindrops */
-        .raindrop {
+        /* Individual Snowflakes */
+        .snowflake {
             position: absolute;
-            background: linear-gradient(to bottom, rgba(173, 216, 230, 0.8), rgba(135, 206, 250, 0.6), transparent);
-            border-radius: 0 0 50% 50%;
-            animation: rainfall linear infinite;
+            color: white;
+            user-select: none;
+            pointer-events: none;
+            animation: snowfall linear infinite;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
-        @keyframes rainfall {
+        @keyframes snowfall {
             0% {
-                transform: translateY(-100vh) translateX(0) rotate(10deg);
+                transform: translateY(-100vh) translateX(0) rotate(0deg);
                 opacity: 0;
             }
             10% {
                 opacity: 1;
             }
             90% {
-                opacity: 1;
+                opacity: 0.9;
             }
             100% {
-                transform: translateY(100vh) translateX(50px) rotate(10deg);
+                transform: translateY(100vh) translateX(var(--drift)) rotate(360deg);
                 opacity: 0;
             }
         }
 
-        /* Rain splash effect */
-        .rain-splash {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, rgba(173, 216, 230, 0.8) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: splash 0.5s ease-out forwards;
+        /* Swaying animation for realistic movement */
+        @keyframes sway {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(10px);
+            }
+            75% {
+                transform: translateX(-10px);
+            }
         }
 
-        @keyframes splash {
+        /* Wind gust effect */
+        @keyframes windGust {
             0% {
-                transform: scale(0);
-                opacity: 1;
+                transform: translateX(0);
             }
             100% {
-                transform: scale(3);
-                opacity: 0;
+                transform: translateX(100px);
             }
         }
 
@@ -177,7 +185,7 @@ i<!DOCTYPE html>
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, rgba(74, 124, 89, 0.7) 0%, rgba(45, 80, 22, 0.8) 50%, rgba(26, 63, 15, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.85) 50%, rgba(15, 23, 42, 0.9) 100%);
             color: white;
             position: relative;
             overflow: hidden;
@@ -188,7 +196,7 @@ i<!DOCTYPE html>
             position: absolute;
             width: 200%;
             height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="40" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="80" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
             animation: float 20s ease-in-out infinite;
             z-index: 0;
         }
@@ -561,8 +569,8 @@ i<!DOCTYPE html>
     </style>
 </head>
 <body>
-    <!-- Rain Container -->
-    <div class="rain-container" id="rainContainer"></div>
+    <!-- Snow Container -->
+    <div class="snow-container" id="snowContainer"></div>
 
     <!-- Navigation -->
     <nav id="navbar">
@@ -748,6 +756,128 @@ i<!DOCTYPE html>
             e.target.reset();
         });
 
+        // Snow Animation System with Realistic Physics
+        const snowflakeShapes = ['❄', '❅', '❆', '✻', '✼', '❋', '✦', '✧'];
+        
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            
+            // Random snowflake properties
+            const shape = snowflakeShapes[Math.floor(Math.random() * snowflakeShapes.length)];
+            const size = Math.random() * 20 + 10; // 10-30px
+            const left = Math.random() * window.innerWidth;
+            const animationDuration = Math.random() * 3 + 8; // 8-11 seconds (slower for bigger flakes)
+            const delay = Math.random() * 2; // 0-2s delay
+            const drift = (Math.random() - 0.5) * 200; // -100px to +100px horizontal drift
+            const swayDuration = Math.random() * 2 + 3; // 3-5s sway period
+            
+            // Bigger flakes fall slower (realistic physics)
+            const adjustedDuration = animationDuration + (size / 30) * 2;
+            
+            // Set snowflake properties
+            snowflake.textContent = shape;
+            snowflake.style.fontSize = size + 'px';
+            snowflake.style.left = left + 'px';
+            snowflake.style.animationDuration = adjustedDuration + 's';
+            snowflake.style.animationDelay = delay + 's';
+            snowflake.style.setProperty('--drift', drift + 'px');
+            
+            // Add subtle opacity variation
+            snowflake.style.opacity = Math.random() * 0.6 + 0.4; // 0.4-1.0 opacity
+            
+            // Add swaying motion
+            const swayKeyframes = `
+                @keyframes sway-${Date.now()}-${Math.random().toString(36).substr(2, 9)} {
+                    0%, 100% { transform: translateX(0) rotate(0deg); }
+                    25% { transform: translateX(${Math.random() * 20 - 10}px) rotate(${Math.random() * 20 - 10}deg); }
+                    75% { transform: translateX(${Math.random() * 20 - 10}px) rotate(${Math.random() * 20 - 10}deg); }
+                }
+            `;
+            
+            // Random wind gusts
+            if (Math.random() < 0.1) { // 10% chance of wind gust
+                setTimeout(() => {
+                    snowflake.style.animation += `, windGust ${Math.random() * 2 + 1}s ease-out`;
+                }, Math.random() * adjustedDuration * 500);
+            }
+            
+            // Add to snow container
+            const snowContainer = document.getElementById('snowContainer');
+            snowContainer.appendChild(snowflake);
+            
+            // Remove snowflake after animation completes
+            setTimeout(() => {
+                if (snowflake && snowflake.parentNode) {
+                    snowflake.remove();
+                }
+            }, (adjustedDuration + delay) * 1000);
+        }
+
+        // Create multiple layers of snow with different intensities
+        function createSnowLayer(intensity, size) {
+            setInterval(() => {
+                for (let i = 0; i < intensity; i++) {
+                    setTimeout(() => createSnowflake(), i * 100);
+                }
+            }, 800); // New batch every 800ms
+        }
+
+        // Generate layered snowfall
+        function startSnowfall() {
+            // Heavy background snow (small flakes)
+            createSnowLayer(2, 'small');
+            
+            // Medium foreground snow
+            setTimeout(() => createSnowLayer(1, 'medium'), 200);
+            
+            // Light large flakes
+            setTimeout(() => createSnowLayer(1, 'large'), 400);
+        }
+
+        // Atmospheric wind effects
+        function createWindGust() {
+            const allSnowflakes = document.querySelectorAll('.snowflake');
+            const gustStrength = Math.random() * 50 + 25; // 25-75px movement
+            
+            allSnowflakes.forEach(flake => {
+                if (Math.random() < 0.3) { // Affect 30% of flakes
+                    flake.style.transform += ` translateX(${gustStrength}px)`;
+                    setTimeout(() => {
+                        flake.style.transform = flake.style.transform.replace(` translateX(${gustStrength}px)`, '');
+                    }, 2000);
+                }
+            });
+        }
+
+        // Random wind gusts every 10-20 seconds
+        function startWind() {
+            setInterval(() => {
+                if (Math.random() < 0.3) { // 30% chance
+                    createWindGust();
+                }
+            }, Math.random() * 10000 + 10000); // 10-20 seconds
+        }
+
+        // Start snow animation when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                startSnowfall();
+                startWind();
+            }, 1000); // Start after 1 second
+        });
+
+        // Cleanup snowflakes periodically to prevent memory buildup
+        setInterval(() => {
+            const snowContainer = document.getElementById('snowContainer');
+            const snowflakes = snowContainer.children;
+            
+            // Remove excess snowflakes (keep only last 150)
+            while (snowflakes.length > 150) {
+                snowflakes[0].remove();
+            }
+        }, 10000); // Every 10 seconds
+
         // Add some interactive cursor effects
         document.addEventListener('mousemove', (e) => {
             const cursor = document.querySelector('.cursor');
@@ -758,11 +888,11 @@ i<!DOCTYPE html>
                     position: fixed;
                     width: 20px;
                     height: 20px;
-                    background: radial-gradient(circle, rgba(255,107,107,0.8) 0%, rgba(78,205,196,0.8) 100%);
+                    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(173,216,230,0.6) 100%);
                     border-radius: 50%;
                     pointer-events: none;
                     z-index: 9999;
-                    mix-blend-mode: difference;
+                    mix-blend-mode: screen;
                     transition: transform 0.1s ease;
                 `;
                 document.body.appendChild(newCursor);
@@ -772,75 +902,6 @@ i<!DOCTYPE html>
             actualCursor.style.left = e.clientX - 10 + 'px';
             actualCursor.style.top = e.clientY - 10 + 'px';
         });
-
-        // Rain Animation System
-        function createRaindrop() {
-            const raindrop = document.createElement('div');
-            raindrop.className = 'raindrop';
-            
-            // Random size and position
-            const size = Math.random() * 3 + 1; // 1-4px wide
-            const height = Math.random() * 10 + 10; // 10-20px tall
-            const left = Math.random() * window.innerWidth;
-            const animationDuration = Math.random() * 1 + 0.5; // 0.5-1.5s
-            const delay = Math.random() * 0.5; // 0-0.5s delay
-            
-            // Set raindrop properties
-            raindrop.style.width = size + 'px';
-            raindrop.style.height = height + 'px';
-            raindrop.style.left = left + 'px';
-            raindrop.style.animationDuration = animationDuration + 's';
-            raindrop.style.animationDelay = delay + 's';
-            
-            // Add to rain container
-            const rainContainer = document.getElementById('rainContainer');
-            rainContainer.appendChild(raindrop);
-            
-            // Create splash effect when raindrop hits bottom
-            setTimeout(() => {
-                createSplash(left);
-                raindrop.remove();
-            }, (animationDuration + delay) * 1000);
-        }
-
-        function createSplash(x) {
-            const splash = document.createElement('div');
-            splash.className = 'rain-splash';
-            splash.style.left = x + 'px';
-            splash.style.bottom = '0px';
-            
-            document.getElementById('rainContainer').appendChild(splash);
-            
-            setTimeout(() => {
-                splash.remove();
-            }, 500);
-        }
-
-        // Generate continuous rain
-        function startRain() {
-            setInterval(() => {
-                // Create multiple raindrops for heavier rain effect
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => createRaindrop(), i * 50);
-                }
-            }, 150); // New batch every 150ms
-        }
-
-        // Start rain animation when page loads
-        window.addEventListener('load', () => {
-            setTimeout(startRain, 1000); // Start after 1 second
-        });
-
-        // Cleanup raindrops periodically to prevent memory buildup
-        setInterval(() => {
-            const rainContainer = document.getElementById('rainContainer');
-            const raindrops = rainContainer.children;
-            
-            // Remove excess raindrops (keep only last 100)
-            while (raindrops.length > 100) {
-                raindrops[0].remove();
-            }
-        }, 5000);
     </script>
 </body>
 </html>
